@@ -5,6 +5,4 @@ from applications.homepage.views import HomePageView
 
 app_name = HomepageConfig.label
 
-urlpatterns = [
-    path("",HomePageView.as_view(),name='index')
-]
+urlpatterns = [path("", HomePageView.as_view(), name="index")]

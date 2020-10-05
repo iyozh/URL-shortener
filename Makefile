@@ -10,9 +10,7 @@ PY := ${RUN} python
 .PHONY: format
 format:
 	${RUN} isort --virtual-env "${VENV}" "${HERE}/src"
-	${RUN} isort --virtual-env "${VENV}" "${HERE}/serverless/src"
 	${RUN} black "${HERE}/src"
-	${RUN} black "${HERE}/serverless/src"
 
 
 .PHONY: run
