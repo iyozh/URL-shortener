@@ -6,12 +6,15 @@ verify_ssl = true
 [dev-packages]
 black = "==20.8b1"
 isort = "*"
+ipython = "*"
 
 [packages]
 django = "*"
 dj-database-url = "*"
 dynaconf = {extras = ["yaml"], version = "*"}
 psycopg2-binary = "*"
+sentry-sdk = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"

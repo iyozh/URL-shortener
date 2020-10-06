@@ -1,6 +1,7 @@
 **/db.sqlite3
 .idea/
 .secrets.yaml
+.static/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
