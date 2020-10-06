@@ -1,16 +1,20 @@
+import os
+from itertools import chain
 from pathlib import Path
+from dynaconf import settings as _ds
+import dj_database_url
 
 BASE_DIR = Path(__file__).parent.parent
 PROJECT_DIR = BASE_DIR / "project"
 REPO_DIR = BASE_DIR.parent
 
+SECRET_KEY = _ds.SECRET_KEY
 
-SECRET_KEY = "fsj&n9y$60y4z=n&h-nlocplm_fi^rdo!^yguu&l^s#nnuo2a*"
+DEBUG = _ds.DEBUG
 
-DEBUG = True
-
-ALLOWED_HOSTS = ["127.0.0.1", "carsmarket.herokuapp.com"]
-
+INTERNAL_IPS = ["127.0.0.1"]
+INTERNAL_HOSTS = ["localhost"]
+ALLOWED_HOSTS = list(chain(_ds.ALLOWED_HOSTS or [], INTERNAL_IPS, INTERNAL_HOSTS))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -52,17 +56,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "project.wsgi.application"
 
+development_database_url = _ds.DATABASE_URL
+database_url = os.getenv("DATABASE_URL",development_database_url)
+database_params = dj_database_url.parse(database_url)
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": database_params
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -79,10 +79,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -93,8 +89,5 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"

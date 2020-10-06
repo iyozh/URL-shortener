@@ -1,0 +1,16 @@
+default:
+  ALLOWED_HOSTS: []
+  PORT: 0
+  DATABASE_URL: ''
+  DEBUG: false
+  SECRET_KEY: ""
+
+development:
+  PORT: 8000
+  DATABASE_URL: ''
+  DEBUG: true
+
+heroku:
+  ALLOWED_HOSTS:
+    - 'carsmarket.herokuapp.com'
+  DEBUG: false
