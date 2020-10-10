@@ -13,5 +13,5 @@ development:
 
 heroku:
   ALLOWED_HOSTS:
-    - 'carsmarket.herokuapp.com'
+    - 'urlcutt.herokuapp.com'
   DEBUG: false
