@@ -18,7 +18,7 @@ class HomePageView(FormView):
     success_url = reverse_lazy('homepage:index')
 
     def get_initial(self):
-        return {Url.original.field.name:self.request.session["shortcut"]}
+        return {Url.original.field.name:self.request.session.get("shortcut")}
 
     def form_valid(self, form):
         original = form.cleaned_data["original"]
