@@ -34,5 +34,5 @@ class HomePageView(FormView):
 class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         absolute_url = self.request.build_absolute_uri()
-        url = Url.objects.get(shortcut=absolute_url)
+        url = Url.objects.filter(shortcut=absolute_url).first()
         return url.original
