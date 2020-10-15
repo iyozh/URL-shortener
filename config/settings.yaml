@@ -5,13 +5,16 @@ default:
   DEBUG: false
   SECRET_KEY: ""
   SENTRY_DSN: ""
+  ACCOUNT_DEFAULT_HTTP_PROTOCOL: ""
 
 development:
   PORT: 8000
   DATABASE_URL: ''
   DEBUG: true
+  ACCOUNT_DEFAULT_HTTP_PROTOCOL: 'http'
 
 heroku:
   ALLOWED_HOSTS:
     - 'urlcutt.herokuapp.com'
   DEBUG: false
+  ACCOUNT_DEFAULT_HTTP_PROTOCOL: 'https'
