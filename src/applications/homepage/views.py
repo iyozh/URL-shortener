@@ -37,5 +37,5 @@ class RedirectToOriginalView(RedirectView):
         absolute_url = self.request.build_absolute_uri()
         if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
             absolute_url.replace("http:", "https:")
-        url = Url.objects.filter(shortcut=absolute_url).first()
-        return url.original
+        redirect_url = Url.objects.filter(shortcut=absolute_url).first()
+        return redirect_url.original
