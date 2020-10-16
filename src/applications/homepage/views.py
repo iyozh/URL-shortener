@@ -3,6 +3,7 @@ import secrets
 from django import forms
 from django.urls import reverse_lazy
 from django.views.generic import FormView, RedirectView
+from dynaconf import settings as _ds
 
 from applications.homepage.models import Url
 
@@ -34,5 +35,7 @@ class HomePageView(FormView):
 class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         absolute_url = self.request.build_absolute_uri()
+        if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
+            absolute_url.replace("http:", "https:")
         url = Url.objects.filter(shortcut=absolute_url).first()
         return url.original

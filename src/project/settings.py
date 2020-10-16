@@ -4,6 +4,7 @@ from pathlib import Path
 
 import dj_database_url
 import sentry_sdk
+from django.urls import reverse_lazy
 from dynaconf import settings as _ds
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -33,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "applications.homepage.apps.HomepageConfig",
+    "applications.onboarding.apps.OnboardingConfig",
 ]
 
 MIDDLEWARE = [
@@ -51,7 +53,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [PROJECT_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -108,3 +110,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = REPO_DIR / ".static"
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL
+
+LOGIN_URL = reverse_lazy("onboarding:sign-in")
+
+LOGIN_REDIRECT_URL = reverse_lazy("homepage:index")

@@ -1,17 +1,14 @@
+{% extends "_base.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Homepage{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'homepage/main.css' %}">
-    {% block head %}
-    {% endblock %}
-</head>
+
+{% block title %}Homepage {% endblock %}
+
+
+{% block body %}
 <body>
 
-<h1 class="title">Hello URL Shortener!</h1>
 <form class="url-input" method="post">
 {{ form }}
     {% csrf_token %}
@@ -19,4 +16,6 @@
 </form>
 
 </body>
+
+{% endblock %}
 
