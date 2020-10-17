@@ -17,6 +17,7 @@ sentry-sdk = "*"
 whitenoise = "*"
 jinja2 = "*"
 django-countries = "*"
+social-auth-app-django = "*"
 
 [requires]
 python_version = "3.8"

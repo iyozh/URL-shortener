@@ -23,12 +23,13 @@ SECRET_KEY = _ds.SECRET_KEY
 DEBUG = _ds.DEBUG
 
 INTERNAL_IPS = ["127.0.0.1"]
-INTERNAL_HOSTS = ["localhost"]
+INTERNAL_HOSTS = ["localhost", "d91d23802fce.ngrok.io"]
 ALLOWED_HOSTS = list(chain(_ds.ALLOWED_HOSTS or [], INTERNAL_IPS, INTERNAL_HOSTS))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
+    "social_django",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -61,6 +62,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
             ],
         },
     },
@@ -114,3 +116,13 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL
 LOGIN_URL = reverse_lazy("onboarding:sign-in")
 
 LOGIN_REDIRECT_URL = reverse_lazy("homepage:index")
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.vk.VKOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = _ds.SOCIAL_AUTH_VK_OAUTH2_KEY
+SOCIAL_AUTH_VK_OAUTH2_SECRET = _ds.SOCIAL_AUTH_VK_OAUTH2_SECRET

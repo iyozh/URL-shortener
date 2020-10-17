@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django_countries.fields import CountryField
@@ -45,3 +45,7 @@ class SignUpView(FormView):
         profile.save()
 
         return super().form_valid(form)
+
+
+class SignOutView(LogoutView):
+    template_name = "onboarding/sign-out.html"
