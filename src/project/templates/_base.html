@@ -18,18 +18,22 @@
   <a href="#news">Statistics</a>
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
+    {% if not user.is_authenticated %}
     <a href="{% url 'onboarding:sign-in' %}">Sign In</a>
   <a href="{% url 'onboarding:sign-up' %}">Sign Up</a>
 
     <a href="{% url 'social:begin' 'vk-oauth2' %}">VK</a>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Google+</a>
+    {% endif %}
 
     {% if user.is_authenticated %}
-        <a href="{% url 'onboarding:sign-out' %}">Sign Out</a>
+
         {% if user.first_name and user.last_name %}
             <a class="profile" href="#">{{ user.first_name }} {{ user.last_name }}</a>
         {% else %}
             <a href="#">{{ user.username }}</a>
         {% endif %}
+    <a href="{% url 'onboarding:sign-out' %}">Sign Out</a>
     {% endif %}
 </div>
 {% block body %} BODY {% endblock %}
