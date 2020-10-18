@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+
+{% block title %} Statistics {% endblock %}
+
+
+{% block body %}
+<h1> {{ user.url }}</h1>
+{% for url in object_list %}
+    {% if url.user == user %}
+        <div>{{ url.original }}| {{ url.shortcut }}</div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
+
