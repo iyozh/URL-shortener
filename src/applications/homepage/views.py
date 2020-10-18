@@ -41,8 +41,8 @@ class RedirectToOriginalView(RedirectView):
         ip = get_client_ip(self.request)
         browser = self.request.META["HTTP_USER_AGENT"]
 
-        # if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
-        #     absolute_url = absolute_url.replace("http:", "https:")
+        if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
+            absolute_url = absolute_url.replace("http:", "https:")
         redirect_url = Url.objects.filter(shortcut=absolute_url).first()
         hit = Hit(ip_adress=ip, browser=browser, url_id=redirect_url.id)
         hit.save()
