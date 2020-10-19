@@ -18,6 +18,7 @@ whitenoise = "*"
 jinja2 = "*"
 django-countries = "*"
 social-auth-app-django = "*"
+httpagentparser = "*"
 
 [requires]
 python_version = "3.8"
