@@ -1,3 +1,5 @@
+import datetime
+
 from httpagentparser import detect, simple_detect
 
 
@@ -12,7 +14,8 @@ def get_client_ip(request):
 
 def get_hit_params(request):
     ip = get_client_ip(request)
-    params = {"ip_adress": ip}
+    time = datetime.datetime.now()
+    params = {"ip_adress": ip, "time": time}
     user_agent = simple_detect(request.META["HTTP_USER_AGENT"])
 
     for key, value in zip(("os", "browser"), user_agent):

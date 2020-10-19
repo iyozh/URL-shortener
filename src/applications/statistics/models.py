@@ -8,3 +8,4 @@ class Hit(models.Model):
     ip_adress = models.GenericIPAddressField(null=True, blank=True)
     browser = models.CharField(max_length=150, null=True, blank=True)
     os = models.CharField(max_length=150, null=True, blank=True)
+    time = models.DateTimeField(null=True, blank=True)

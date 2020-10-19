@@ -4,15 +4,22 @@
 
 
 {% block title %} Statistics {% endblock %}
-
+{% block head %} {% endblock %}
 
 {% block body %}
-<h1> {{ user.url }}</h1>
+<h1 class="stats-title">My links</h1>
+<div class="links-list">
+
 {% for url in object_list %}
     {% if url.user == user %}
-        <div>{{ url.original }}| {{ url.shortcut }}</div>
+    <div class="list-item">
+        <div class="origin-link"><a href="{{url.original }}">{{url.original }}</a></div>
+        <div class="short-link"><a href="{{url.shortcut }}">{{url.shortcut }}</a></div>
+        <div class="more"><a href="#">More...</a></div>
+    </div>
     {% endif %}
 {% endfor %}
+</div>
 
 {% endblock %}
 
