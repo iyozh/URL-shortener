@@ -1,6 +1,8 @@
 import datetime
 
-from httpagentparser import detect, simple_detect
+from django.contrib.gis.geoip2 import GeoIP2
+from geoip2.errors import AddressNotFoundError
+from httpagentparser import simple_detect
 
 
 def get_client_ip(request):
@@ -15,7 +17,14 @@ def get_client_ip(request):
 def get_hit_params(request):
     ip = get_client_ip(request)
     time = datetime.datetime.now()
-    params = {"ip_adress": ip, "time": time}
+    try:
+        location = GeoIP2().country_name(ip)
+
+    except AddressNotFoundError:
+        location = "Undefined"
+
+    params = {"ip_address": ip, "time": time, "location": location}
+
     user_agent = simple_detect(request.META["HTTP_USER_AGENT"])
 
     for key, value in zip(("os", "browser"), user_agent):

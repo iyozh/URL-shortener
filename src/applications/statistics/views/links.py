@@ -4,6 +4,6 @@ from django.views.generic import ListView
 from applications.homepage.models import Url
 
 
-class StatisticView(LoginRequiredMixin, ListView):
-    template_name = "statistics/statistics.html"
+class LinksView(LoginRequiredMixin, ListView):
+    template_name = "statistics/links.html"
     model = Url

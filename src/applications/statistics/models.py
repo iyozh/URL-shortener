@@ -5,7 +5,8 @@ from applications.homepage.models import Url
 
 class Hit(models.Model):
     url = models.ForeignKey(Url, on_delete=models.CASCADE, editable=False)
-    ip_adress = models.GenericIPAddressField(null=True, blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
     browser = models.CharField(max_length=150, null=True, blank=True)
     os = models.CharField(max_length=150, null=True, blank=True)
     time = models.DateTimeField(null=True, blank=True)
+    location = models.TextField(null=True, blank=True)

@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from applications.onboarding.apps import OnboardingConfig
 from applications.onboarding.views import SignInView, SignOutView, SignUpView

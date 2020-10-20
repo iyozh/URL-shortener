@@ -7,19 +7,15 @@
 {% block head %} {% endblock %}
 
 {% block body %}
-<h1 class="stats-title">My links</h1>
-<div class="links-list">
+<div class="stats-container inline">
+    <div class="stats-title">
+        <div class="stats-shortcut"><a href="{{ object.shortcut }}"><h1>{{ object.shortcut }}</h1></a></div>
+        {% if object.original|length > 100 %}
+        <div class="stats-original"><h2>Original:</h2><a href="{{ object.original }}">{{ object.original|truncatechars:80 }}</a></div>
+        {% else %}
+        <div class="stats-original"><h2>Original:</h2><a href="{{ object.original }}">{{ object.original }}</a></div>
+        {% endif %}
 
-{% for url in object_list %}
-    {% if url.user == user %}
-    <div class="list-item">
-        <div class="origin-link"><a href="{{url.original }}">{{url.original }}</a></div>
-        <div class="short-link"><a href="{{url.shortcut }}">{{url.shortcut }}</a></div>
-        <div class="more"><a href="#">More...</a></div>
     </div>
-    {% endif %}
-{% endfor %}
 </div>
-
 {% endblock %}
-

@@ -16,7 +16,7 @@
 <h1 class="title">URL Shortener</h1>
 <div class="topnav">
   <a class="active" href="{% url 'homepage:index' %}">Home</a>
-  <a href="{% url 'statistics:stats' %} ">Statistics</a>
+  <a href="{% url 'statistics:links' %} ">Statistics</a>
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
     {% if not user.is_authenticated %}

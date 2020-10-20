@@ -19,6 +19,7 @@ jinja2 = "*"
 django-countries = "*"
 social-auth-app-django = "*"
 httpagentparser = "*"
+geoip2 = "*"
 
 [requires]
 python_version = "3.8"

@@ -17,6 +17,8 @@ sentry_sdk.init(
 BASE_DIR = Path(__file__).parent.parent
 PROJECT_DIR = BASE_DIR / "project"
 REPO_DIR = BASE_DIR.parent
+GEOIP_PATH = BASE_DIR / "geoip2"
+
 
 SECRET_KEY = _ds.SECRET_KEY
 
