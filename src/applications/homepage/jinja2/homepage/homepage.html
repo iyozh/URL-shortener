@@ -1,7 +1,5 @@
 {% extends "_base.html" %}
 
-{% load static %}
-
 
 {% block title %}Homepage {% endblock %}
 
@@ -11,7 +9,7 @@
 
 <form class="url-input" method="post">
 {{ form }}
-    {% csrf_token %}
+    {{ csrf_input }}
     <button type="submit">Shorten URL</button>
 </form>
 

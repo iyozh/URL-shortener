@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+
+{% block title %} Links {% endblock %}
+{% block head %} {% endblock %}
+
+{% block body %}
+<h1 class="links-title">My links</h1>
+<div class="links-list">
+
+{% for link in object_list %}
+    {% if link.user == user %}
+    <div class="list-item">
+        <div class="origin-link"><a href="{{ link.original }}">{{ link.original }}</a></div>
+        <div class="short-link"><a href="{{ link.shortcut }}">{{ link.shortcut }}</a></div>
+        <div class="more"><a href="{{ url ('statistics:hits',args=[link.pk] ) }}">More...</a></div>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}
+

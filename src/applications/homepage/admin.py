@@ -3,9 +3,9 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib.admin import ModelAdmin
 
-from applications.homepage.models import Url
+from applications.homepage.models import Link
 
 
-@admin.register(Url)
+@admin.register(Link)
 class ProfileAdminModel(ModelAdmin):
     pass

@@ -19,7 +19,6 @@ PROJECT_DIR = BASE_DIR / "project"
 REPO_DIR = BASE_DIR.parent
 GEOIP_PATH = BASE_DIR / "geoip2"
 
-
 SECRET_KEY = _ds.SECRET_KEY
 
 DEBUG = _ds.DEBUG
@@ -56,8 +55,24 @@ ROOT_URLCONF = "project.urls"
 
 TEMPLATES = [
     {
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "DIRS": [
+            PROJECT_DIR / "jinja2",
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "environment": "project.utils.templates.build_jinja2_env",
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+    {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [PROJECT_DIR / "templates"],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

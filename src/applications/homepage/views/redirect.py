@@ -1,9 +1,9 @@
 from django.views.generic import RedirectView
 from dynaconf import settings as _ds
 
-from applications.homepage.models import Url
+from applications.homepage.models import Link
 from applications.statistics.models import Hit
-from utils.web_utils import get_hit_params
+from project.utils.web_utils import get_hit_params
 
 
 class RedirectToOriginalView(RedirectView):
@@ -14,7 +14,7 @@ class RedirectToOriginalView(RedirectView):
         if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
             absolute_url = absolute_url.replace("http:", "https:")
 
-        redirect_url = Url.objects.filter(shortcut=absolute_url).first()
+        redirect_url = Link.objects.filter(shortcut=absolute_url).first()
         hit = Hit(**params, url_id=redirect_url.id)
         hit.save()
         return redirect_url.original

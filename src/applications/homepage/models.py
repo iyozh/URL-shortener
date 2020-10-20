@@ -4,7 +4,7 @@ from django.db import models
 User = get_user_model()
 
 
-class Url(models.Model):
+class Link(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     original = models.URLField(null=True, blank=True)
     shortcut = models.URLField(null=True, blank=True)
