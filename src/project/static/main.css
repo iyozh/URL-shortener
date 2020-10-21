@@ -116,13 +116,22 @@ body{
 }
 
 .stats-container {
-    margin:0 auto;
-    width:100%;
-    max-width:700px;
+    display:flex;
+    flex-direction:row-reverse;
+    margin-top:20px;
 }
 
 
 .stats-title{
+    margin-bottom:15px;
+    width:1200px;
+    height: 250px;
+    background-color: #ffffff;
+    position:relative;
+    border: 2px solid #D4D4D4;
+    border-radius: 50px;
+    box-shadow: 0 0 15px #A9A9A9;
+    padding:20px 40px;
     text-align:center;
 }
 
@@ -146,17 +155,17 @@ body{
 }
 
 .total{
-    margin-top:50px;
     margin-bottom:15px;
+    margin-right:30px;
     width:300px;
-    height: 200px;
+    height: 250px;
     background-color: #ffffff;
     position:relative;
     border: 2px solid #D4D4D4;
     border-radius: 50px;
     box-shadow: 0 0 15px #A9A9A9;
     padding:20px 40px;
-    font-size:80px;
+    font-size:85px;
     color: #2281c2;
 }
 
