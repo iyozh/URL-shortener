@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Confirmation {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ static ('homepage/confirmation.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<h1 class="confirmation-title">Confirmation Page</h1>
+<h2 class="confirmation-paragraph">
+    Short links can be dangerous, so are you sure you want to follow this link?
+</h2>
+<div class="buttons">
+    <a href="{{ object.shortcut }}"><button class="button-yes" type="submit">Yes</button></a>
+</div>
+</body>

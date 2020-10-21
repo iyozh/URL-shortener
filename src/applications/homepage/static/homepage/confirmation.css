@@ -1,0 +1,41 @@
+body{
+    font-family: 'Quicksand', sans-serif;
+}
+
+.confirmation-title{
+    text-align:center;
+    font-size:60px;
+    color: #319FE9;
+}
+
+.confirmation-paragraph{
+    text-align:center;
+}
+
+.buttons{
+    text-align:center;
+}
+
+.button-yes{
+    cursor:pointer;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 100px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    border-color:black;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 500;
+    background: white;
+    transition: .3s;
+    padding-top:0px;
+    margin-right:30px;
+}
+
+.button-yes:hover{
+  background: #bcf4f1;
+}

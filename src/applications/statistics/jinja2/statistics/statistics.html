@@ -21,6 +21,18 @@
     <div class="click-text">Total clicks</div>
 </div>
 </div>
+<div class="settings">
+    <div class="settings-title">Settings</div>
+        <div class="confirm-section">
+               <div class="confirm">
+                    <form method="post" action="{{ url ('statistics:update-confirm',args=[object.pk] ) }}">
+                        {{ csrf_input }}
+                        <p>{{ form }}  Show the confirmation page when following the link<br></p>
+                        <p><button class="button-apply" type="submit">Apply</button></p>
+                    </form>
+                </div>
+        </div>
+</div>
 
 <div class="hits">
     <table>
