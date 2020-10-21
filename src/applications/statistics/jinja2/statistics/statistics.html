@@ -17,4 +17,32 @@
 
     </div>
 </div>
+<div class="total">
+    <div class="count">{{ hits|length }}</div>
+    <div class="click-text">Total clicks</div>
+</div>
+<div class="hits">
+    <table>
+         <tr class="table-title" >
+                    <td class="tag ip">IP</td>
+                    <td class="tag location">Location</td>
+                    <td class="tag date">Date</td>
+                    <td class="tag browser">Browser</td>
+                    <td class="tag os">OS</td>
+         </tr>
+
+            {% for hit in hits %}
+
+                        <tr class="params">
+                            <td>{{ hit.ip_address }}</td>
+                            <td>{{ hit.location }}</td>
+                            <td>{{ hit.time.strftime('%Y-%m-%d, %H:%M') }}</td>
+                            <td>{{ hit.browser }}</td>
+                            <td>{{ hit.os }}</td>
+                        </tr>
+
+            {% endfor %}
+
+    </table>
+</div>
 {% endblock %}
