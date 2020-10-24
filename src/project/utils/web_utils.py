@@ -1,4 +1,5 @@
 import datetime
+from typing import Dict
 
 from django.contrib.gis.geoip2 import GeoIP2
 from geoip2.errors import AddressNotFoundError
@@ -14,7 +15,7 @@ def get_client_ip(request):
     return ip
 
 
-def get_hit_params(request):
+def get_hit_params(request) -> Dict:
     ip = get_client_ip(request)
     time = datetime.datetime.now()
     try:

@@ -10,16 +10,26 @@ default:
   SOCIAL_AUTH_VK_OAUTH2_SECRET: ""
   SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: ""
   SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: ""
-
+  AWS_S3_CODES_LOCATION: ""
+  AWS_ACCESS_KEY_ID: ""
+  AWS_S3_REGION_NAME: ""
+  AWS_SECRET_ACCESS_KEY: ""
+  AWS_STORAGE_BUCKET_NAME: ""
 
 development:
   PORT: 8000
   DATABASE_URL: ''
   DEBUG: true
   ACCOUNT_DEFAULT_HTTP_PROTOCOL: 'http'
+  AWS_S3_REGION_NAME: "eu-central-1"
+  AWS_STORAGE_BUCKET_NAME: "urlcutt"
+  AWS_S3_CODES_LOCATION: "qrcodes-dev"
 
 heroku:
   ALLOWED_HOSTS:
     - 'urlcutt.herokuapp.com'
   DEBUG: false
   ACCOUNT_DEFAULT_HTTP_PROTOCOL: 'https'
+  AWS_S3_REGION_NAME: "eu-central-1"
+  AWS_STORAGE_BUCKET_NAME: "urlcutt"
+  AWS_S3_CODES_LOCATION: "qrcodes-heroku"

@@ -20,6 +20,9 @@ django-countries = "*"
 social-auth-app-django = "*"
 httpagentparser = "*"
 geoip2 = "*"
+boto3 = "*"
+django-storages = "*"
+pyqrcode = "*"
 
 [requires]
 python_version = "3.8"

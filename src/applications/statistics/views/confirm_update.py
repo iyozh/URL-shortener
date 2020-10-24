@@ -4,7 +4,7 @@ from applications.homepage.models import Link
 from applications.statistics.forms.checkbox import CheckboxForm
 
 
-class ConfirmUpdate(UpdateView):
+class ConfirmUpdateView(UpdateView):
     model = Link
     http_method_names = ["post"]
     form_class = CheckboxForm

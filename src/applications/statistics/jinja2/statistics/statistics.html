@@ -32,6 +32,14 @@
                     </form>
                 </div>
         </div>
+        <div class="utm-title">UTM</div>
+                <div class="utm">
+                    <form method="post" action="{{ url ('statistics:update_utm',args=[object.utm.pk] ) }}">
+                        {{ csrf_input }}
+                        <p>{{ utm.as_p() }}<br></p>
+                        <p><button class="button-apply" type="submit">Apply</button></p>
+                    </form>
+                </div>
 </div>
 
 <div class="hits">
