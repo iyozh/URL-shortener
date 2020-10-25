@@ -19,7 +19,7 @@ class HomePageView(FormView):
 
     def form_valid(self, form):
         original = form.cleaned_data["original"]
-        shortcut = self.request.headers["Referer"] + secrets.token_urlsafe(3)
+        shortcut = self.request.headers["Referer"] + secrets.token_urlsafe(3) + "/"
 
         self.request.session["shortcut"] = shortcut
 
