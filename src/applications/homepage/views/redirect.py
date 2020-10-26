@@ -17,10 +17,16 @@ class RedirectToOriginalView(RedirectView):
         redirect_url = Link.objects.filter(shortcut=absolute_url).first()
 
         if redirect_url.confirm:
-            if "confirmation" not in self.request.headers["Referer"]:
+            if redirect_url.marker:
+                redirect_url.marker = False
+                redirect_url.save()
                 return reverse_lazy(
                     "homepage:confirmation", kwargs={"pk": redirect_url.pk}
                 )
+
+        if not redirect_url.marker:
+            redirect_url.marker = True
+            redirect_url.save()
 
         params = get_hit_params(self.request)
         hit = Hit(**params, url_id=redirect_url.id)

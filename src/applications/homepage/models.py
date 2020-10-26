@@ -16,6 +16,7 @@ class Link(models.Model):
     shortcut = models.URLField(null=True, blank=True)
     confirm = models.BooleanField(default=False)
     utm_copy = models.URLField(null=True, blank=True, editable=False)
+    marker = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "url"
