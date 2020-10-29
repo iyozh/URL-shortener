@@ -15,6 +15,7 @@ default:
   AWS_S3_REGION_NAME: ""
   AWS_SECRET_ACCESS_KEY: ""
   AWS_STORAGE_BUCKET_NAME: ""
+  PROTOCOL_HOST: ""
 
 development:
   PORT: 8000
@@ -24,6 +25,7 @@ development:
   AWS_S3_REGION_NAME: "eu-central-1"
   AWS_STORAGE_BUCKET_NAME: "urlcutt"
   AWS_S3_CODES_LOCATION: "qrcodes-dev"
+  PROTOCOL_HOST: "http://127.0.0.1:8000/"
 
 heroku:
   ALLOWED_HOSTS:
@@ -33,3 +35,4 @@ heroku:
   AWS_S3_REGION_NAME: "eu-central-1"
   AWS_STORAGE_BUCKET_NAME: "urlcutt"
   AWS_S3_CODES_LOCATION: "qrcodes-heroku"
+  PROTOCOL_HOST: "https://urlcutt.herokuapp.com/"

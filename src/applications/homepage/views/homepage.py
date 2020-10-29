@@ -1,6 +1,5 @@
 import secrets
 
-import pyqrcode
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -19,9 +18,11 @@ class HomePageView(FormView):
 
     def form_valid(self, form):
         original = form.cleaned_data["original"]
-        shortcut = self.request.headers["Referer"] + secrets.token_urlsafe(3) + "/"
+
+        shortcut = self.request.headers["Referer"] + secrets.token_urlsafe(3)
 
         self.request.session["shortcut"] = shortcut
+        self.request.session.set_expiry(0)
 
         url = Link(
             original=original,
@@ -33,10 +34,5 @@ class HomePageView(FormView):
 
         utm = UTM(link_id=url.id)
         utm.save()
-
-        # qr_code = pyqrcode.create(shortcut)
-        #
-        # code = QRCode(original=qr_code.svg(f"{secrets.token_urlsafe(3)}.svg", scale=8), link_id=url.id)
-        # code.save()
 
         return super().form_valid(form)

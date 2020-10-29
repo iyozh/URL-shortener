@@ -36,10 +36,15 @@
                 <div class="utm">
                     <form method="post" action="{{ url ('statistics:update_utm',args=[object.utm.pk] ) }}">
                         {{ csrf_input }}
-                        <p>{{ utm.as_p() }}<br></p>
+                        <p>{{ utm.as_p() }}</p>
                         <p><button class="button-apply" type="submit">Apply</button></p>
                     </form>
                 </div>
+        <div class="delete-title">Delete link</div>
+            <form method="post">
+                {{ csrf_input }}
+                <p><button class="button-delete" formaction="{{ url ('statistics:delete',args=[object.pk]) }}" type="submit">Delete</button></p>
+            </form>
 </div>
 
 <div class="hits">

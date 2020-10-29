@@ -35,9 +35,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "rest_framework.authtoken",
     "applications.homepage.apps.HomepageConfig",
     "applications.onboarding.apps.OnboardingConfig",
     "applications.statistics.apps.StatisticsConfig",
+    "applications.api_guide.apps.ApiGuideConfig",
+    "applications.api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -157,3 +161,10 @@ AWS_S3_ADDRESSING_STYLE = "path"
 AWS_S3_REGION_NAME = _ds.AWS_S3_REGION_NAME
 AWS_SECRET_ACCESS_KEY = _ds.AWS_SECRET_ACCESS_KEY
 AWS_STORAGE_BUCKET_NAME = _ds.AWS_STORAGE_BUCKET_NAME
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication"
+    ]
+}

@@ -9,7 +9,7 @@ from project.utils.web_utils import get_hit_params
 
 class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        absolute_url = self.request.build_absolute_uri()
+        absolute_url = self.request.build_absolute_uri()[:-1]
 
         if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
             absolute_url = absolute_url.replace("http:", "https:")

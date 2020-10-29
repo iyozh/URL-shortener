@@ -22,7 +22,7 @@ httpagentparser = "*"
 geoip2 = "*"
 boto3 = "*"
 django-storages = "*"
-pyqrcode = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.8"

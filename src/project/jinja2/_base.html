@@ -16,7 +16,7 @@
 <div class="topnav">
   <a class="active" href="{{ url ('homepage:index') }}">Home</a>
   <a href="{{ url ('statistics:links') }} ">Statistics</a>
-  <a href="#contact">Contact</a>
+  <a href="{{ url ('api_guide:index') }}">API Guide</a>
   <a href="#about">About</a>
     {% if not user.is_authenticated %}
     <a href="{{ url ('onboarding:sign-in') }}">Sign In</a>

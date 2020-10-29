@@ -11,15 +11,18 @@ def upload_to(instance: "QRCode", filename):
 
 
 class Link(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True, editable=False
+    )
     original = models.URLField(null=True, blank=True)
-    shortcut = models.URLField(null=True, blank=True)
+    shortcut = models.URLField(editable=False, null=True, blank=True)
     confirm = models.BooleanField(default=False)
     utm_copy = models.URLField(null=True, blank=True, editable=False)
-    marker = models.BooleanField(default=True)
+    marker = models.BooleanField(editable=False, default=True)
 
     class Meta:
-        verbose_name_plural = "url"
+        verbose_name_plural = "link"
+        ordering = ["-id"]
 
     def __str__(self):
         return f"{self.shortcut}(user = {self.user})"
