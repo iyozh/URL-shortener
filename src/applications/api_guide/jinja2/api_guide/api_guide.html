@@ -5,19 +5,148 @@
 
 
 {% block body %}
-<body>
+<body style="font-size:15px;">
 
 <h1 class="api-title">API Guide</h1>
+{% if user.is_authenticated %}
+    <p>You are ready to use our API right now!</p>
+{% else %}
 <p>To start using our API you need to be authenticated to get unique API token</p>
 <p>After that on this page you will get a special API token,which is used for making requests to our API.</p>
+{% endif %}
 <p>Our API allows:</p>
     <ul>
         <li>getting information about your own links</li>
         <li>shortening your links</li>
         <li>deletion your links</li>
+        <li>customization of confirmation page and UTM</li>
     </ul>
-
+{% if user.is_authenticated %}
+<p>Your API token: <span class="token">{{ api_token }}</span></p>
+{% endif %}
+<h1 class="second-api-title">Sending your first request</h1>
+<div class="tutorial">
+<p>Requests are sent in different methods.The response is returned in JSON format.</p>
+    <p>Root endpoint:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">https://urlcutt.herokuapp.com/api/v1/...</pre>
+<p>
+    Our API requires existence of API token in headers in all kinds of requests: <pre class="hljs"><span class="hljs-symbol">AUTHORIZATION:</span> <span class="hl-params">Token &lt;YOUR API TOKEN&gt;</span></pre>
+    <p>Response object attributes:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);"><b>.content
+.status_code
+.url
+.request
+.headers
+.cookies
+.reason</b>
+</pre>
+    <p>To shorten your link you need to fill "original" field and send POST-request(example in Python):</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">requests.post(<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://urlcutt.herokuapp.com/api/v1/link/"</span>,
+headers = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"AUTHORIZATION"</span>: <span class="hljs-string" style="color: rgb(136, 0, 0);">"Token &lt;YOUR API TOKEN&gt;"</span>
+},
+data = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=MTsOTwJFwFQ&amp;ab_channel=IGM"</span>
+})</pre>
+    <p>Response in JSON format (newly created link):</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">{
+   <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">130</span>,
+   <span class="hljs-attr">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=MTsOTwJFwFQ&amp;ab_channel=IGM"</span>,
+   <span class="hljs-attr">"shortcut"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"http://urlcutt.herokuapp.com/W0BK"</span>,
+   <span class="hljs-attr">"confirm"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">false</span>,
+   <span class="hljs-attr">"utm_copy"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=MTsOTwJFwFQ&amp;ab_channel=IGM"</span>,
+   <span class="hljs-attr">"marker"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+   <span class="hljs-attr">"user"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">1</span>
+}</pre>
+<p>To get all your links you need to send GET-request:</p>
+<pre class="hljs"><span class="hl-params">https://urlcutt.herokuapp.com/api/v1/link/</span></pre>
+<p>Response in JSON format:</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">[
+   {
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">129</span>,
+      <span class="hljs-attr">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+      <span class="hljs-attr">"shortcut"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"http://urlcutt.herokuapp.com/UiRb"</span>,
+      <span class="hljs-attr">"confirm"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">false</span>,
+      <span class="hljs-attr">"utm_copy"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+      <span class="hljs-attr">"marker"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+      <span class="hljs-attr">"user"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">1</span>
+   },
+   {
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">103</span>,
+      <span class="hljs-attr">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.django-rest-framework.org/api-guide/viewsets/?"</span>,
+      <span class="hljs-attr">"shortcut"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"http://urlcutt.herokuapp.com/W9Ep/"</span>,
+      <span class="hljs-attr">"confirm"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">false</span>,
+      <span class="hljs-attr">"utm_copy"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.django-rest-framework.org/api-guide/viewsets/"</span>,
+      <span class="hljs-attr">"marker"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+      <span class="hljs-attr">"user"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">1</span>
+   }
+]</pre>
+<p>To get certain link add link ID to previous GET-request:</p>
+<pre class="hljs"><span class="hl-params">https://urlcutt.herokuapp.com/api/v1/link/129/</span></pre>
+    <p>Response in JSON format:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">{
+   <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">129</span>,
+   <span class="hljs-attr">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+   <span class="hljs-attr">"shortcut"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"http://urlcutt.herokuapp.com/UiRb"</span>,
+   <span class="hljs-attr">"confirm"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">false</span>,
+   <span class="hljs-attr">"utm_copy"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+   <span class="hljs-attr">"marker"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+   <span class="hljs-attr">"user"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">1</span>
+}</pre>
+      <p>To delete link make DELETE-request(example in Python)</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">requests.delete(<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://urlcutt.herokuapp.com/api/v1/link/129"</span>,
+headers = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"AUTHORIZATION"</span>: <span class="hljs-string" style="color: rgb(136, 0, 0);">"Token &lt;YOUR API TOKEN&gt;"</span>
+})</pre>
+    <p>To customize existence of confirmation page make PATCH-request and send True in "confirm" field,if you want to see confirmation page,or send False (default) to disable (example in Python):</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">requests.patch(<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://urlcutt.herokuapp.com/api/v1/link/129/"</span>,
+headers = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"AUTHORIZATION"</span>: <span class="hljs-string" style="color: rgb(136, 0, 0);">"Token &lt;YOUR API TOKEN&gt;"</span>
+},
+data = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"confirm"</span>: <span class="hljs-keyword" style="font-weight: 700;">True</span>
+})</pre>
+    <p>Response in JSON format:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">{
+   <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">129</span>,
+   <span class="hljs-attr">"original"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+   <span class="hljs-attr">"shortcut"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"http://urlcutt.herokuapp.com/UiRb"</span>,
+   <span class="hljs-attr">"confirm"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+   <span class="hljs-attr">"utm_copy"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://www.youtube.com/watch?v=rEJ7p0A3FfY&amp;ab_channel=FragmentWorld"</span>,
+   <span class="hljs-attr">"marker"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">true</span>,
+   <span class="hljs-attr">"user"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">1</span>
+}</pre>
+<p>To get information about UTM in your link send GET-request: </p>
+    <pre class="hljs"><span class="hl-params">https://urlcutt.herokuapp.com/api/v1/utm/130/</span></pre>
+    <p>Response in JSON format:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">{
+   <span class="hljs-attr">"link"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">130</span>,
+   <span class="hljs-attr">"utm_source"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_medium"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_campaign"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_term"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_content"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>
+}</pre>
+    <p>To setup UTM send PATCH-request (example in Python): </p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">requests.patch(<span class="hljs-string" style="color: rgb(136, 0, 0);">"https://urlcutt.herokuapp.com/api/v1/utm/130/"</span>,
+headers = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"AUTHORIZATION"</span>: <span class="hljs-string" style="color: rgb(136, 0, 0);">"Token &lt;YOUR API TOKEN&gt;"</span>
+},
+data = {
+<span class="hljs-string" style="color: rgb(136, 0, 0);">"utm_source"</span>: <span class="hljs-string" style="color: rgb(136, 0, 0);">"google"</span>
+})</pre>
+    <p>Response in JSON format:</p>
+     <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">{
+   <span class="hljs-attr">"link"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">130</span>,
+   <span class="hljs-attr">"utm_source"</span>:<span class="hljs-literal" style="color: rgb(136, 0, 0);">"google"</span>,
+   <span class="hljs-attr">"utm_medium"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_campaign"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_term"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
+   <span class="hljs-attr">"utm_content"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>
+}</pre>
+</div>
 </body>
+
 
 {% endblock %}
 

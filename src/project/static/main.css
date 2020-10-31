@@ -345,3 +345,32 @@ p,ul {
     list-style-type:none;
     padding-right:50px;
 }
+
+.token{
+    font-weight:700;
+    font-size:25px;
+    color: #2281c2;
+}
+
+.second-api-title{
+    margin-top:50px;
+    font-size:35px;
+    text-align:center;
+}
+
+.hljs{
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(240, 240, 240);
+    color: rgb(68, 68, 68);
+}
+
+.hljs-symbol{
+    color: rgb(188, 96, 96);
+}
+
+.tutorial p{
+    font-weight:700;
+    font-size:23px;
+}

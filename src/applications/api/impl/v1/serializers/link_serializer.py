@@ -1,3 +1,4 @@
+
 from rest_framework.serializers import ModelSerializer
 
 from applications.homepage.models import Link
@@ -5,6 +6,7 @@ from applications.statistics.models import UTM
 
 
 class LinkSerializer(ModelSerializer):
+
     class Meta:
         model = Link
         fields = "__all__"

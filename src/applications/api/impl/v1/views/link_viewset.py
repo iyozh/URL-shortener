@@ -1,6 +1,9 @@
+import json
 import secrets
 
+from django.db.models import Q
 from dynaconf import settings as _ds
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -25,4 +28,11 @@ class LinkViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = Link.objects.filter(user_id=self.request.user.id)
         serializer = LinkSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = Link.objects.filter(Q(user_id=self.request.user.id) & Q(id=kwargs["pk"])).first()
+        if not instance:
+            return Response(data="No content", status=status.HTTP_204_NO_CONTENT)
+        serializer = LinkSerializer(instance)
         return Response(serializer.data)
