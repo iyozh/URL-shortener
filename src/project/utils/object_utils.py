@@ -24,10 +24,12 @@ def _get_utm_string(utm_object):
     return utm_string
 
 
-def update_utm(utm_string, link_id):
+def _update_utm(utm_string, link_id):
 
     link = Link.objects.filter(id=link_id).first()
 
     new = link.utm_copy + utm_string
     link.original = new
     link.save()
+
+    return link.utm

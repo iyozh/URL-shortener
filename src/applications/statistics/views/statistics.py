@@ -15,7 +15,7 @@ class StatisticsView(FormMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        hits = Hit.objects.filter(url_id=self.object.id)
+        hits = Hit.objects.filter(link_id=self.object.id)
         initial_values = _get_utm_initial_values(self.object)
         utm = UtmForm(initial=initial_values)
         ctx.update({"hits": hits, "utm": utm})

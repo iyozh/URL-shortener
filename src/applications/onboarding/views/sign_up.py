@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from rest_framework.authtoken.models import Token
+
 from applications.onboarding.forms import SignUpForm
 from applications.onboarding.models import Profile
 

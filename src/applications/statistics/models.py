@@ -6,7 +6,7 @@ from applications.homepage.models import Link, upload_to
 
 
 class Hit(models.Model):
-    url = models.ForeignKey(Link, on_delete=models.CASCADE, editable=False)
+    link = models.ForeignKey(Link, on_delete=models.CASCADE, editable=False)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     browser = models.CharField(max_length=150, null=True, blank=True)
     os = models.CharField(max_length=150, null=True, blank=True)

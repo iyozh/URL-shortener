@@ -1,9 +1,8 @@
 from django.views.generic import UpdateView
 
-from applications.homepage.models import Link
 from applications.statistics.forms.utm_form import UtmForm
 from applications.statistics.models import UTM
-from project.utils.object_utils import _get_utm_string, update_utm
+from project.utils.object_utils import _get_utm_string, _update_utm
 
 
 class UtmUpdateView(UpdateView):
@@ -16,6 +15,6 @@ class UtmUpdateView(UpdateView):
 
         utm_string = _get_utm_string(self.object)
 
-        update_utm(utm_string, self.object.link_id)
+        _update_utm(utm_string, self.object.link_id)
 
         return redirect_response

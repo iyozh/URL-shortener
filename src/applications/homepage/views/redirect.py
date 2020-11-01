@@ -29,6 +29,6 @@ class RedirectToOriginalView(RedirectView):
             redirect_url.save()
 
         params = get_hit_params(self.request)
-        hit = Hit(**params, url_id=redirect_url.id)
+        hit = Hit(**params, link_id=redirect_url.id)
         hit.save()
         return redirect_url.original

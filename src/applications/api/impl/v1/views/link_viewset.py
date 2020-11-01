@@ -1,4 +1,3 @@
-import json
 import secrets
 
 from django.db.models import Q
@@ -10,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from applications.api.impl.v1.serializers.link_serializer import LinkSerializer
 from applications.homepage.models import Link
+from applications.statistics.models import UTM
 
 
 class LinkViewSet(ModelViewSet):
@@ -24,6 +24,8 @@ class LinkViewSet(ModelViewSet):
         serializer.save(
             shortcut=shortcut, user_id=user_id, utm_copy=utm_copy, marker=True
         )
+        utm = UTM(link_id=serializer.data["id"])
+        utm.save()
 
     def list(self, request, *args, **kwargs):
         queryset = Link.objects.filter(user_id=self.request.user.id)
@@ -31,8 +33,21 @@ class LinkViewSet(ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
-        instance = Link.objects.filter(Q(user_id=self.request.user.id) & Q(id=kwargs["pk"])).first()
+        instance = Link.objects.filter(
+            Q(user_id=self.request.user.id) & Q(id=kwargs["pk"])
+        ).first()
+
         if not instance:
-            return Response(data="No content", status=status.HTTP_204_NO_CONTENT)
-        serializer = LinkSerializer(instance)
-        return Response(serializer.data)
+            return Response(data="Not found", status=status.HTTP_404_NOT_FOUND)
+
+        return super().retrieve(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = Link.objects.filter(
+            Q(user_id=self.request.user.id) & Q(id=kwargs["pk"])
+        ).first()
+
+        if not instance:
+            return Response(data="Not found", status=status.HTTP_404_NOT_FOUND)
+
+        return super().partial_update(request, *args, **kwargs)
