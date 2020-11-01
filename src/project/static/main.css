@@ -374,3 +374,38 @@ p,ul {
     font-weight:700;
     font-size:23px;
 }
+
+.root-endpoint{
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(240, 240, 240);
+    color: rgb(68, 68, 68);
+}
+
+.attrs{
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(240, 240, 240);
+    color: rgb(68, 68, 68);
+}
+
+.shorten-link-api_guide{
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(240, 240, 240);
+    color: rgb(68, 68, 68);
+}
+
+.hljs-string, .hljs-number,.hljs-literal-google, .shorten-link-api_guide span{
+    color: rgb(136, 0, 0);
+}
+
+.hljs-literal{
+    color: rgb(120, 169, 96);
+}
+.hljs-keyword{
+    font-weight: 700;
+}
