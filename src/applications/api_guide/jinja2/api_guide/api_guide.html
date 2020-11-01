@@ -144,6 +144,29 @@ data = {
    <span class="hljs-attr">"utm_term"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>,
    <span class="hljs-attr">"utm_content"</span>:<span class="hljs-literal" style="color: rgb(120, 169, 96);">null</span>
 }</pre>
+    <p>To get statistics clicks of your link send GET-request with query params:</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">https://urlcutt.herokuapp.com/api/v1/hit/?id=<span class="hljs-number">103</span></pre>
+    <p>Response in JSON format:</p>
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);">[
+   {
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">95</span>,
+      <span class="hljs-attr">"ip_address"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"127.0.0.1"</span>,
+      <span class="hljs-attr">"browser"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Chrome 86.0.4240.111"</span>,
+      <span class="hljs-attr">"os"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Windows 10"</span>,
+      <span class="hljs-attr">"time"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"2020-10-28T16:47:13.991658"</span>,
+      <span class="hljs-attr">"location"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Undefined"</span>,
+      <span class="hljs-attr">"link"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">103</span>
+   },
+   {
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">94</span>,
+      <span class="hljs-attr">"ip_address"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"127.0.0.1"</span>,
+      <span class="hljs-attr">"browser"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Chrome 86.0.4240.111"</span>,
+      <span class="hljs-attr">"os"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Windows 10"</span>,
+      <span class="hljs-attr">"time"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"2020-10-28T16:46:56.378783"</span>,
+      <span class="hljs-attr">"location"</span>:<span class="hljs-string" style="color: rgb(136, 0, 0);">"Undefined"</span>,
+      <span class="hljs-attr">"link"</span>:<span class="hljs-number" style="color: rgb(136, 0, 0);">103</span>
+   }
+]</pre>
 </div>
 </body>
 
