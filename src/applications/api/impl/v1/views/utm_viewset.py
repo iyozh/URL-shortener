@@ -13,32 +13,23 @@ from project.utils.object_utils import _update_utm
 class UtmViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = UtmSerializer
-    queryset = UTM.objects.all()
     http_method_names = ["patch", "get"]
+
+    def get_queryset(self):
+        queryset = UTM.objects.filter(
+            Q(link__user_id=self.request.user.id) & Q(link_id=self.kwargs["pk"])
+        )
+
+        return queryset
 
     def partial_update(self, request, *args, **kwargs):
         redirect_response = super().partial_update(request, *args, **kwargs)
 
         link_id = kwargs["pk"]
 
-        instance = UTM.objects.filter(
-            Q(link__user_id=self.request.user.id) & Q(link_id=kwargs["pk"])
-        ).first()
-
-        if not instance:
-            return Response(data="Not found", status=status.HTTP_404_NOT_FOUND)
+        instance = self.get_object()
 
         utm_string = _get_utm_string(instance)
         _update_utm(utm_string, link_id)
 
         return redirect_response
-
-    def retrieve(self, request, *args, **kwargs):
-        instance = UTM.objects.filter(
-            Q(link__user_id=self.request.user.id) & Q(link_id=kwargs["pk"])
-        ).first()
-
-        if not instance:
-            return Response(data="Not found", status=status.HTTP_404_NOT_FOUND)
-
-        return super().retrieve(request, *args, **kwargs)
