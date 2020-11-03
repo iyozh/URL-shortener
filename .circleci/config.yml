@@ -3,20 +3,34 @@ version: 2.1
 orbs:
   python: circleci/python@0.2.1
 
-jobs:
-  build-and-test:
-    executor: python/default
-    steps:
-      - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
-      - run:
-          command: ./manage.py test
-          name: Test
 
 workflows:
   main:
     jobs:
       - build-and-test
 
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - cc-venv-{{ checksum "Pipfile.lock" }}
+            - run:
+                name: Setting up virtualenv
+                command: |
+                  sudo pip install pipenv
+                  make venv-dev
+            - save_cache:
+                key: cc-venv-{{ checksum "Pipfile.lock" }}
+                paths:
+                  - ./.venv/
+
+
+      - run:
+          name: Performing Tests
+          command: |
+            make test

@@ -5,7 +5,7 @@ PYTHONPATH := ${SRC}
 
 RUN := pipenv run
 PY := ${RUN} python
-
+PIPENV_INSTALL := pipenv install
 
 .PHONY: format
 format:
@@ -64,3 +64,8 @@ wipe-sls:
 .PHONY: test
 test:
 	${RUN} pytest --driver Chrome
+
+
+.PHONY: venv-dev
+venv-dev:
+	${PIPENV_INSTALL} --dev
