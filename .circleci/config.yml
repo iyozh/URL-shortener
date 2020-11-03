@@ -1,36 +1,36 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.2.1
+  postgres: onehq/postgres@1.1.0
 
 
 workflows:
   main:
     jobs:
-      - build-and-test
-
+      - build-and-test:
+          context:
+            - docker-hub-creds
 
 jobs:
   build-and-test:
-    executor: python/default
     steps:
       - checkout
 
       - restore_cache:
           keys:
             - cc-venv-{{ checksum "Pipfile.lock" }}
-            - run:
-                name: Setting up virtualenv
-                command: |
-                  sudo pip install pipenv
-                  make venv-dev
-            - save_cache:
-                key: cc-venv-{{ checksum "Pipfile.lock" }}
-                paths:
-                  - ./.venv/
-
+      - run:
+          name: Setting up virtualenv
+          command: |
+            sudo pip install pipenv
+            make venv-dev
+      - save_cache:
+          key: cc-venv-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ./.venv/
 
       - run:
           name: Performing Tests
           command: |
             make test
+
