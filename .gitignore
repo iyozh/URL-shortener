@@ -6,7 +6,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.pytest_cache/
+.tests_artifacts/
+tests/**/*.html
+tests/**/*.png
 # C extensions
 *.so
 

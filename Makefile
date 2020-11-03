@@ -55,6 +55,12 @@ wipe: wipe-static wipe-sls
 wipe-static:
 	rd /s /q "${HERE}/.static/"
 
+
 .PHONY: wipe-sls
 wipe-sls:
 	rd /s /q "${HERE}/serverless/.serverless/"
+
+
+.PHONY: test
+test:
+	${RUN} pytest --driver Chrome
