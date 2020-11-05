@@ -6,12 +6,19 @@ orbs:
 workflows:
   main:
     jobs:
-      - build-and-test
+      - build-and-test:
+          context:
+            - dockerhub-creds
 
 jobs:
   build-and-test:
-    executor: python/default
     steps:
+      - docker:
+          - image: circleci/python:3.8.5-browsers
+            auth:
+              username: $DOCKERHUB_USERNAME
+              password: $DOCKERHUB_PASSWORD
+
       - checkout
 
       - restore_cache:
