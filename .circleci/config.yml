@@ -35,14 +35,19 @@ jobs:
           paths:
             - ./.venv/
 
+      - restore_cache:
+          keys:
+            - cc-selenium-{{ checksum "./.circleci/selenium.link" }}
       - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.9.1.jar -log tests/functional/artifacts/selenium.log
-          background: true
-
+          name: Setting up Selenium
+          command: |
+            test -f selenium.jar || curl -O $(cat ./.circleci/selenium.link)
+            mv selenium-*.jar selenium.jar || exit 0
+            test -f selenium.jar
+      - save_cache:
+          key: cc-selenium-{{ checksum "./.circleci/selenium.link" }}
+          paths:
+            - ./selenium.jar
 
       - run:
           name: Performing Tests
