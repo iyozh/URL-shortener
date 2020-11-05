@@ -63,7 +63,7 @@ wipe-sls:
 
 .PHONY: test
 test:
-	${RUN} pytest --driver Chrome
+	${RUN} pytest
 
 
 .PHONY: venv-dev
