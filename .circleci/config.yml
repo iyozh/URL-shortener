@@ -40,7 +40,7 @@ jobs:
           command: curl -O http://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar
       - run:
           name: Start Selenium
-          command: java -jar selenium-server-standalone-3.9.1.jar -log tests/functional/artifactcs/selenium.log
+          command: java -jar selenium-server-standalone-3.9.1.jar -log tests/functional/artifacts/selenium.log
           background: true
 
 
