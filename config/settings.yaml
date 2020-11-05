@@ -36,3 +36,6 @@ heroku:
   AWS_STORAGE_BUCKET_NAME: "urlcutt"
   AWS_S3_CODES_LOCATION: "qrcodes-heroku"
   PROTOCOL_HOST: "https://urlcutt.herokuapp.com/"
+
+ci:
+  PORT: 8000

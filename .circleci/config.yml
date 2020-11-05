@@ -11,8 +11,6 @@ jobs:
   build-and-test:
     environment:
       ENV_FOR_DYNACONF: ci
-      PGPASSWORD: ci
-      PIPENV_VENV_IN_PROJECT: 1
       PYTHONPATH: src
 
     docker:
