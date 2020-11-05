@@ -1,14 +1,13 @@
 import pytest
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 
-from tests.functional.pages.homepage import HomePage
+from tests.functional.pages import HomePage
 
 url = "http://127.0.0.1:8000"
 
 
 @pytest.mark.functional
-def test_get(browser, request):
+def test_get(browser):
     page = HomePage(browser, url)
 
     validate_title(page)
