@@ -8,7 +8,7 @@ url = "http://127.0.0.1:8000"
 
 
 @pytest.mark.functional
-def test_get(browser):
+def test_get(browser, request):
     page = HomePage(browser, url)
 
     validate_title(page)
