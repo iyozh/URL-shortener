@@ -50,6 +50,11 @@ jobs:
             - ./selenium.jar
 
       - run:
+          name: (Running Selenium)
+          command: java -jar selenium.jar -log tests/functional/artifacts/selenium.log
+          background: true
+
+      - run:
           name: Performing Tests
           command: |
             make test
