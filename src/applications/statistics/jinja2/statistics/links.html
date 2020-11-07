@@ -12,8 +12,11 @@
     {% if link.user == user %}
     <div class="list-item">
         <div class="origin-link"><a href="{{ link.original }}">{{ link.original }}</a></div>
-        <div class="short-link"><a href="{{ link.shortcut }}">{{ link.shortcut }}</a></div>
-        
+        {% if request.scheme == "https" %}
+        <div class="short-link"><a href="{{ link.shortcut}}">{{ link.shortcut|replace('https://','') }}</a></div>
+        {% else %}
+        <div class="short-link"><a href="{{ link.shortcut}}">{{ link.shortcut|replace('http://','') }}</a></div>
+        {% endif %}
         <div class="more"><a href="{{ url ('statistics:hits',args=[link.pk] ) }}">More...</a></div>
     </div>
     {% endif %}
