@@ -1,6 +1,5 @@
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
-from dynaconf import settings as _ds
 
 from applications.homepage.models import Link
 from applications.statistics.models import Hit
@@ -9,10 +8,7 @@ from project.utils.web_utils import get_hit_params
 
 class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        absolute_url = self.request.build_absolute_uri()[:-1]
-
-        if _ds.ACCOUNT_DEFAULT_HTTP_PROTOCOL == "https":
-            absolute_url = absolute_url.replace("http:", "https:")
+        absolute_url = f"{self.request.scheme}://{self.request.headers['Host']}/{self.kwargs['key']}"
 
         redirect_url = Link.objects.filter(shortcut=absolute_url).first()
 
