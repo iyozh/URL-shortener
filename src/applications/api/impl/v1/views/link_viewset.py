@@ -26,5 +26,3 @@ class LinkViewSet(ModelViewSet):
         )
         utm = UTM(link_id=serializer.data["id"])
         utm.save()
-
-

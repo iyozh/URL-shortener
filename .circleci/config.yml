@@ -53,6 +53,10 @@ jobs:
           name: (Running Selenium)
           command: java -jar selenium.jar -log tests/functional/artifacts/selenium.log
           background: true
+      - run:
+          name: (Running Web Server)
+          command: make run
+          background: true
 
       - run:
           name: Performing Tests
