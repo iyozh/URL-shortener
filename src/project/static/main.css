@@ -150,7 +150,7 @@ body{
 .stats-shortcut {
     border-bottom: 1px solid black;
 }
-.links-title{
+.links-title, .sign-title{
     text-align:center;
 }
 

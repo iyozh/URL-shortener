@@ -5,6 +5,7 @@
 {% block body %}
 
 <body>
+<h1 class="sign-title">Sign In</h1>
 {% if next %}
     {% if user.is_authenticated %}
 
@@ -18,7 +19,7 @@
         <article>
             <form method="post">
                 {{ form.as_p() }}
-                <button type="submit" class="button">Sign In</button>
+                <button type="submit" class="button" id="id_sign_in">Sign In</button>
                 {{ csrf_input }}
                 <input name="next" type="hidden" value="{{ next }}">
             </form>

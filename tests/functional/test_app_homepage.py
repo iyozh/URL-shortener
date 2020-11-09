@@ -1,3 +1,4 @@
+import re
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
@@ -19,6 +20,7 @@ def test_get(browser):
     validate_content(page, "URL Shortener")
 
 
+@pytest.mark.functional
 def test_post(browser):
     link = "http://example.com"
 
@@ -30,9 +32,24 @@ def test_post(browser):
 
     enter_link(page, link)
     submit(page)
-
     validate_redirect(page)
     validate_content(page, "URL Shortener")
+    validate_structure(page)
+    validate_result(page)
+
+    submit(page)
+    validate_redirect(page)
+    validate_content(page, "Enter a valid URL")
+
+    enter_link(page, "")
+    submit(page)
+    validate_redirect(page)
+    validate_content(page, "Enter a valid URL")
+
+    enter_link(page, "abc123")
+    submit(page)
+    validate_redirect(page)
+    validate_content(page, "Enter a valid URL")
 
 
 def validate_title(page: HomePage):
@@ -70,3 +87,8 @@ def validate_redirect(page: HomePage):
         assert redirect
     except TimeoutException:
         raise AssertionError("no redirect")
+
+
+def validate_result(page: HomePage):
+    shortcut = page.input_link.get_attribute("value")
+    assert re.match("http://127.0.0.1:8000/.{4}$", shortcut)

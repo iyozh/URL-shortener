@@ -9,6 +9,7 @@ isort = "*"
 ipython = "*"
 pytest = "*"
 pytest-selenium = "*"
+pytest-ordering = "*"
 
 [packages]
 django = "*"
