@@ -5,7 +5,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-
 from tests.functional.pages import HomePage
 
 url = "http://127.0.0.1:8000"
@@ -22,6 +21,7 @@ def test_get(browser):
 
 @pytest.mark.functional
 def test_post(browser):
+
     link = "http://example.com"
 
     page = HomePage(browser, url)

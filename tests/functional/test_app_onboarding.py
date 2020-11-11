@@ -30,6 +30,7 @@ def test_get_sign_up(browser):
 
 @pytest.mark.functional
 def test_registration(browser):
+
     page = SignUpPage(browser, sign_up_url)
 
     email = 'example@gmail.com'
@@ -76,7 +77,7 @@ def test_login(browser):
     enter_password(page, password)
     submit_login(page)
     validate_redirect(page, homepage_url)
-    validate_content(page, username)
+    validate_content(page, username, 'Sign Out')
 
 
 def validate_title(page, title):
@@ -118,9 +119,10 @@ def validate_structure(page: SignUpPage):
     assert button_sign_up.tag_name == "button"
 
 
-def validate_content(page, content):
+def validate_content(page, *content):
     html = page.html
-    assert content in html
+    for text in content:
+        assert text in html
 
 
 def enter_username(page, user):
