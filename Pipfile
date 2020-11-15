@@ -10,6 +10,7 @@ ipython = "*"
 pytest = "*"
 pytest-selenium = "*"
 pytest-ordering = "*"
+locust = "*"
 
 [packages]
 django = "*"
@@ -26,6 +27,7 @@ geoip2 = "*"
 boto3 = "*"
 django-storages = "*"
 djangorestframework = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

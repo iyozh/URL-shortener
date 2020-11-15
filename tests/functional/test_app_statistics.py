@@ -58,6 +58,7 @@ def test_post(browser):
     validate_title(page, "Statistics")
     validate_statistics_structure(page)
     validate_content(page, 'Total clicks', 'Settings', 'IP', 'Location')
+
     click_link(page, "id_shortcut")
     validate_title(page, "Confirmation")
     validate_content(page, 'Confirmation Page')
