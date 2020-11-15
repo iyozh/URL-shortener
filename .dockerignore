@@ -1,0 +1,11 @@
+**/.cache
+**/.DS_Store
+.cache/
+.pytest_cache/
+.git/
+.gitignore
+.idea/
+.static/
+docker-compose.yml
+Procfile
+README.md
