@@ -11,7 +11,6 @@ class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         absolute_url = self.request.build_absolute_uri()[:-1]
 
-
         redirect_url = Link.objects.filter(shortcut=absolute_url).first()
 
         if redirect_url.confirm:
