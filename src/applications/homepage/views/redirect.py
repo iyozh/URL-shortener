@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound, Http404
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 
@@ -10,6 +11,9 @@ class RedirectToOriginalView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
 
         redirect_url = Link.objects.filter(shortcut__contains=self.kwargs.get("key")).first()
+
+        if not redirect_url:
+            raise Http404
 
         if redirect_url.confirm:
             if redirect_url.marker:
