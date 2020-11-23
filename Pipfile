@@ -28,6 +28,8 @@ boto3 = "*"
 django-storages = "*"
 djangorestframework = "*"
 gunicorn = "*"
+pyqrcode = "*"
+pypng = "*"
 
 [requires]
 python_version = "3.8"

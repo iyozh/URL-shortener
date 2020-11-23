@@ -207,6 +207,7 @@ table{
 }
 
 .settings{
+    display:flex;
     margin-top:15px;
     margin-bottom:15px;
     width:100%;
@@ -408,4 +409,13 @@ p,ul {
 }
 .hljs-keyword{
     font-weight: 700;
+}
+
+.code{
+    margin-left:270px;
+}
+.code-title{
+    margin-left:300px;
+    font-size:40px;
+    font-weight:500;
 }

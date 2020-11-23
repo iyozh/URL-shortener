@@ -22,29 +22,35 @@
 </div>
 </div>
 <div class="settings">
-    <div class="settings-title">Settings</div>
-        <div class="confirm-section">
-               <div class="confirm">
-                    <form method="post" action="{{ url ('statistics:update-confirm',args=[object.pk] ) }}">
-                        {{ csrf_input }}
-                        <p>{{ form }}  Show the confirmation page when following the link<br></p>
-                        <p><button class="button-apply" type="submit" id="id_button_confirm">Apply</button></p>
-                    </form>
-                </div>
-        </div>
-        <div class="utm-title">UTM</div>
-                <div class="utm">
-                    <form method="post" action="{{ url ('statistics:update_utm',args=[object.utm.pk] ) }}">
-                        {{ csrf_input }}
-                        <p>{{ utm.as_p() }}</p>
-                        <p><button class="button-apply" type="submit" id="id_button_utm">Apply</button></p>
-                    </form>
-                </div>
-        <div class="delete-title">Delete link</div>
-            <form method="post">
-                {{ csrf_input }}
-                <p><button class="button-delete" id="id_delete" formaction="{{ url ('statistics:delete',args=[object.pk]) }}" type="submit">Delete</button></p>
-            </form>
+    <div class="settings-block">
+        <div class="settings-title">Settings</div>
+            <div class="confirm-section">
+                   <div class="confirm">
+                        <form method="post" action="{{ url ('statistics:update-confirm',args=[object.pk] ) }}">
+                            {{ csrf_input }}
+                            <p>{{ form }}  Show the confirmation page when following the link<br></p>
+                            <p><button class="button-apply" type="submit" id="id_button_confirm">Apply</button></p>
+                        </form>
+                    </div>
+            </div>
+            <div class="utm-title">UTM</div>
+                    <div class="utm">
+                        <form method="post" action="{{ url ('statistics:update_utm',args=[object.utm.pk] ) }}">
+                            {{ csrf_input }}
+                            <p>{{ utm.as_p() }}</p>
+                            <p><button class="button-apply" type="submit" id="id_button_utm">Apply</button></p>
+                        </form>
+                    </div>
+            <div class="delete-title">Delete link</div>
+                <form method="post">
+                    {{ csrf_input }}
+                    <p><button class="button-delete" id="id_delete" formaction="{{ url ('statistics:delete',args=[object.pk]) }}" type="submit">Delete</button></p>
+                </form>
+    </div>
+    <div class="code-block">
+        <div class="code-title">QR code</div>
+        <img class="code" src="{{ object.qrcode.original.url }}">
+    </div>
 </div>
 
 <div class="hits">
@@ -70,5 +76,6 @@
             {% endfor %}
 
     </table>
+
 </div>
 {% endblock %}
