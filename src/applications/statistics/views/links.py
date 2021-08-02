@@ -7,3 +7,4 @@ from applications.homepage.models import Link
 class LinksView(LoginRequiredMixin, ListView):
     template_name = "statistics/links.html"
     model = Link
+    paginate_by = 8
