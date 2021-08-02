@@ -9,15 +9,14 @@
 <div class="links-list" id="id_links_list">
 
 {% for link in object_list %}
-    {% if link.user == user %}
     <div class="list-item" id="id_list_item">
         <div class="origin-link"><a href="{{ link.original }}">{{ link.original }}</a></div>
         <div class="short-link"><a href="{{ link.shortcut }}">{{ link.shortcut|replace(request.scheme+'://','') }}</a></div>
         <div class="more"><a id="id_more" href="{{ url ('statistics:hits',args=[link.pk] ) }}">More...</a></div>
     </div>
-    {% endif %}
 {% endfor %}
 </div>
+
 {% if page_obj.has_other_pages() %}
 <nav aria-label="Page navigation">
   <ul class="pagination pagination-lg justify-content-center">

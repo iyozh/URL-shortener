@@ -8,3 +8,7 @@ class LinksView(LoginRequiredMixin, ListView):
     template_name = "statistics/links.html"
     model = Link
     paginate_by = 8
+
+    def get_queryset(self):
+        queryset = Link.objects.filter(user_id=self.request.user.id)
+        return queryset
