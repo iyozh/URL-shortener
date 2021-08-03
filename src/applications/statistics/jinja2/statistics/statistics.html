@@ -3,7 +3,12 @@
 
 {% block title %} Statistics {% endblock %}
 
-{% block head %} {% endblock %}
+{% block head %}
+<script crossorigin="anonymous"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        src="https://code.jquery.com/jquery-3.4.1.min.js">
+</script>
+{% endblock %}
 
 {% block body %}
 <div class="stats-container inline">
@@ -54,7 +59,7 @@
 </div>
 
 <div class="hits">
-    <table>
+    <table id="hits">
          <tr class="table-title" >
                     <td class="tag ip">IP</td>
                     <td class="tag location">Location</td>
@@ -63,12 +68,12 @@
                     <td class="tag os">OS</td>
          </tr>
 
-            {% for hit in hits %}
+            {% for hit in paginator.page(1).object_list %}
 
                         <tr class="params">
                             <td>{{ hit.ip_address }}</td>
                             <td>{{ hit.location }}</td>
-                            <td>{{ hit.time.strftime('%Y-%m-%d, %H:%M') }}</td>
+                            <td>{{ hit.time.strftime('%d-%m-%Y, %H:%M') }}</td>
                             <td>{{ hit.browser }}</td>
                             <td>{{ hit.os }}</td>
                         </tr>
@@ -76,6 +81,47 @@
             {% endfor %}
 
     </table>
+    {% for i in paginator.page_range %}
+<a style="margin-left: 5px; font-size: 20px;" href="{{i}}">{{i}}</a>
+{% endfor %}
 
 </div>
+<script>
+ function toJSDate (dateTime) {
+
+                    var dateTime = dateTime.split("T");//dateTime[0] = date, dateTime[1] = time
+
+                    var date = dateTime[0].split("-");
+                    var time = dateTime[1].split(":");
+
+                    //(year, month, day, hours, minutes, seconds, milliseconds)
+                    return new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2], 0);
+}
+$('a').click(function(event){
+
+    event.preventDefault();
+    var page_n = $(this).attr('href');
+    // ajax
+        $.ajax({
+                type: "POST",
+                url: "{{ url ('statistics:hits',args=[object.id] ) }}", // name of url
+                data : {
+                page_n : page_n, //page_number
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (resp) {
+                //loop
+                $('#hits').html('<tr class="table-title"> <td class="tag ip">IP</td> <td class="tag location">Location</td><td class="tag date">Date</td><td class="tag browser">Browser</td><td class="tag os">OS</td>')
+               $.each(resp.result, function(i, val) {
+                var jsDate = toJSDate(val.time);
+                var formatDate = jsDate.toLocaleDateString("nl",{year:"numeric",month:"2-digit", day:"2-digit"}) + ", " + jsDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                 //apending posts
+                $('#hits').append('<tr class="params"><td>' + val.ip_address + '</td> + <td>' + val.location + '</td> + <td>' +
+                formatDate + '</td> + <td>' + val.browser + '</td> + <td>' + val.os + '</td></tr> ')
+               });
+            },
+            error: function () {}
+        }); //
+});
+</script>
 {% endblock %}
