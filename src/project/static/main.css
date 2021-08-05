@@ -52,10 +52,6 @@ body{
     align-items: flex-start;
 }
 
-*, :after, :before {
-    box-sizing: border-box;
-}
-
 .list-item {
     width: 100%;
     border: 1px solid #02af63;
@@ -187,8 +183,9 @@ body{
 }
 
 
-table{
+#hits{
     border-spacing:50px 30px;
+    border-collapse: separate !important;
 }
 
 .table-title{

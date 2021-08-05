@@ -28,7 +28,7 @@ class StatisticsView(FormMixin, DetailView):
         hits = Hit.objects.filter(link_id=self.object.id)
         initial_values = _get_utm_initial_values(self.object)
         utm = UtmForm(initial=initial_values)
-        paginator = Paginator(hits, 5)
+        paginator = Paginator(hits, 10)
         ctx.update({"hits": hits, "utm": utm, "paginator": paginator})
         return ctx
 
