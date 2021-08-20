@@ -91,21 +91,10 @@
 
 </div>
 <script>
- function toJSDate (dateTime) {
-
-                    var dateTime = dateTime.split("T");//dateTime[0] = date, dateTime[1] = time
-
-                    var date = dateTime[0].split("-");
-                    var time = dateTime[1].split(":");
-
-                    //(year, month, day, hours, minutes, seconds, milliseconds)
-                    return new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2], 0);
-}
 $('.page-link').click(function(event){
 
     event.preventDefault();
     var page_n = $(this).attr('href');
-    console.log(page_n);
     // ajax
         $.ajax({
                 type: "POST",
@@ -118,8 +107,8 @@ $('.page-link').click(function(event){
                 //loop
                 $('#hits').html('<tr class="table-title"> <td class="tag ip">IP</td> <td class="tag location">Location</td><td class="tag date">Date</td><td class="tag browser">Browser</td><td class="tag os">OS</td>')
                $.each(resp.result, function(i, val) {
-                var jsDate = toJSDate(val.time);
-                var formatDate = jsDate.toLocaleDateString("nl",{year:"numeric",month:"2-digit", day:"2-digit"}) + ", " + jsDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                var dateOfVisit = new Date(Date.parse(val.time));
+                var formatDate = dateOfVisit.toLocaleDateString("nl",{year:"numeric",month:"2-digit", day:"2-digit"}) + ", " + dateOfVisit.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                  //apending posts
                 $('#hits').append('<tr class="params"><td>' + val.ip_address + '</td> + <td>' + val.location + '</td> + <td>' +
                 formatDate + '</td> + <td>' + val.browser + '</td> + <td>' + val.os + '</td></tr> ')
